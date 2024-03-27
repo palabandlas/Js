@@ -26,33 +26,37 @@ function writeToLog(
   logEntries.push(logEntry);
   console.log(logEntries);
 }
-function add() {
+function caluculateResult(calculationType) {
   const enteredNumber = getUserNumberInput();
   const initialResult = currentResult;
-  currentResult += enteredNumber;
-  createAndWriteOutput("+", initialResult, enteredNumber);
-  writeToLog("ADD", initialResult, enteredNumber, currentResult);
+  let mathOperator;
+  if (calculationType === "ADD") {
+    currentResult += enteredNumber;
+    mathOperator = "+";
+  } else if (calculationType === "SUBTRACT") {
+    currentResult -= enteredNumber;
+    mathOperator = "-";
+  } else if (calculationType === "MULTIPLY") {
+    currentResult *= enteredNumber;
+    mathOperator = "*";
+  } else if (calculationType === "DIVIDE") {
+    currentResult /= enteredNumber;
+    mathOperator = "/";
+  }
+  createAndWriteOutput(mathOperator, initialResult, enteredNumber);
+  writeToLog(calculationType, initialResult, enteredNumber, currentResult);
+}
+function add() {
+  caluculateResult("ADD");
 }
 function subtract() {
-  const enteredNumber = getUserNumberInput();
-  const initialResult = currentResult;
-  currentResult -= enteredNumber;
-  createAndWriteOutput("-", initialResult, enteredNumber);
-  writeToLog("SUBTRACT", initialResult, enteredNumber, currentResult);
+  caluculateResult("SUBTRACT");
 }
 function multiply() {
-  const enteredNumber = getUserNumberInput();
-  const initialResult = currentResult;
-  currentResult *= enteredNumber;
-  createAndWriteOutput("*", initialResult, enteredNumber);
-  writeToLog("MULTIPLY", initialResult, enteredNumber, currentResult);
+  caluculateResult("MULTIPLY");
 }
 function divide() {
-  const enteredNumber = getUserNumberInput();
-  const initialResult = currentResult;
-  currentResult /= enteredNumber;
-  createAndWriteOutput("/", initialResult, enteredNumber);
-  writeToLog("DIVIDE", initialResult, enteredNumber, currentResult);
+  caluculateResult("DIVIDE");
 }
 addBtn.addEventListener("click", add);
 subtractBtn.addEventListener("click", subtract);
